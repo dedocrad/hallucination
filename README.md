@@ -28,14 +28,18 @@
 
 ## Результаты экспериментов
 
-*Результаты получены на репрезентативной выборке бенчмарка `flowaicom/HaluEval` (test split).*
+*Оценка на сплите HaluEval QA. Значения для семейства Gemma 2 взяты из исследования Lamba et al. (2025).*
 
-| Модель / Конфигурация | Стратегия | Accuracy ↑ | Missed Hallucinations (FNR) ↓ |
-| :--- | :--- | :---: | :---: |
-| **Gemma 3 4B (4-bit)** | Zero-shot | 0.695 | 0.380 |
-| **Gemma 3 4B (4-bit)** | One-shot | 0.730 | 0.315 |
-| **Gemma 3 4B (4-bit)** | **Self-Verification** | **0.805** | **0.190** |
-| *Gemma 2 27B (Reference Baseline)* | *Standard evaluation* | *0.814* | *0.186* |
+| Модель / Конфигурация | Метод / Стратегия | Hallucination Rate  |
+| :--- | :--- | :---: |
+| Gemma-2 2B *(Reference)* | Standard evaluation | 0.790 |
+| Gemma-2 9B *(Reference)* | Standard evaluation | 0.736 |
+| **Gemma-2 27B *(Reference Baseline)*** | **Standard evaluation** | **0.639** |
+| :----------------------------------- | :---------------------- | :---: |
+| **Gemma 3 4B (4-bit)** | **Self-Verification One-shot** | *0.7614* |
+| **Gemma 3 4B (4-bit)** | **Self-Verification Zero-shot** | **0.6364** |
+
+> **Вывод:** Добавление цикла самопроверки (Self-Verification) позволило квантованной модели Gemma 3 4B сократить показатель Hallucination Rate до **~0.64**, достигнув уровня значительно более тяжелой модели Gemma-2 27B (0.639).
 
 ### Выводы:
 * **Zero-shot** компактной модели пропускает до 38% галлюцинаций из-за поверхностного анализа длинного контекста.
